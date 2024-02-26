@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class=container>
+    <h1 style = "color: indigo"> MindForge: A Comunidade dos Programadores em Python. </h1>
+    <h2 style = "color: Secondary">A gênesis do MindForgePy começa aqui:</h2>
+</div>
+<hr>
+<div class=container>
+    <p> Faça seu Login e poste suas dúvidas em Python, em breve alguém irá te responder.</p>
+    <p> Atenciosamente, </p>
+    <p> Equipe MindForgePy </p>
+</div>
+<div class=container>
+    {% for post in posts %}
+    <div class="row border mt-4 p-3 meupost ">
+        <div class="col col-2">
+            <div class="image pe-2"><img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="img-thumbnail" width="185"></div>
+        </div>
+        <div class="col col-2">
+            <strong> {{ post.autor.fullname }}</strong>
+            <div class="row justify-content-evenly">
+                    {% for curso in post.autor.cursos.split(';') %}
+                        <button type="button" class="btn btn-success mt-2"disabled>{{ curso }}</button>
+                    {% endfor %}
+            </div>
+        </div>
+        <div class="col col-8">
+           <a style="text-decoration:none" href=" {{ url_for('exibir_post', post_id=post.id) }}"><h3> {{ post.titulo }}</h3></a>
+            <p>{{ post.corpo }}</p>
+        </div>
+    </div>
+        {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'perfil.html' %}
+
+
+{% block form_editar_perfil %}
+                <div class=container>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="col">
+                                <form method="POST" action="" class="border p-4 m-3" enctype="multipart/form-data">
+                                    {{ form_editar_perfil_routes.csrf_token }}
+                                     <legend>Editar Perfil</legend>
+                                    <fieldset>
+                                        <div class="form-group"
+                                            {{ form_editar_perfil_routes.fullname.label (class="form-control-label") }}
+                                             {% if form_editar_perfil_routes.fullname.errors %}
+                                                     {{ form_editar_perfil_routes.fullname (class="form-control is-invalid") }}
+                                                     <div class="invalid-feedback">
+                                                         {% for erro in form_editar_perfil_routes.fullname.errors %}
+                                                            {{ erro }}
+                                                         {% endfor %}
+                                                     </div>
+                                                    {% else %}
+                                                        {{ form_editar_perfil_routes.fullname (class="form-control")}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group"
+                                            {{ form_editar_perfil_routes.email.label (class="form-control-label") }}
+                                             {% if form_editar_perfil_routes.email.errors %}
+                                                     {{ form_editar_perfil_routes.email (class="form-control is-invalid") }}
+                                                     <div class="invalid-feedback">
+                                                         {% for erro in form_editar_perfil_routes.email.errors %}
+                                                            {{ erro }}
+                                                         {% endfor %}
+                                                     </div>
+                                                    {% else %}
+                                                        {{ form_editar_perfil_routes.email(class="form-control")}}
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_editar_perfil_routes.foto_perfil.label }}<br>
+                                            <span class="container-fluid">{{ form_editar_perfil_routes.foto_perfil (class="form-control-file") }}</span><br>
+                                            {% if form_editar_perfil_routes.foto_perfil.errors %}<br>
+                                                {% for erro in form_editar_perfil_routes.foto_perfil.errors %}<br>
+                                                    <span class="text-danger">{{ erro }}</span><br>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <hr>
+                                        <legend>Cursos</legend><br>
+                                        <p>Selecione Seus Cursos:</p>
+                                            {% for campo in form_editar_perfil_routes %}
+                                                {% if 'curso_' in campo.name %}
+                                                     <div class="form-group">
+                                                        {{ campo (class="form-check-input")}}
+                                                        {{ campo.label (class="form-check-label")}}
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </fieldset>
+                                        {{ form_editar_perfil_routes.botao_submit_editarperfil (class="btn btn-dark mt-3") }}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}

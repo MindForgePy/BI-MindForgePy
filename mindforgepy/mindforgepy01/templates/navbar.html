@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid container">
+                        <!--        <div class="navbar-brand" href="{{ url_for('home')}}">-->
+                        <!--            <div class="image pe-3" >-->
+                        <!--                <img src="static/fotos_perfil/logo_site.jpg" class="rounded" width="40">-->
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--        <a class="navbar-brand" href="{{ url_for('home')}}">MindForge</a>-->
+        <a class="navbar-brand" href="{{ url_for('home')}}">
+            <span class="me-2"><img src = "static/logo_site.jpg" class="rounded" width="30"></span                      >MindForge
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ url_for('home')}}"              >Início</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{ url_for('usuarios')}}"                              >Usuários</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{ url_for('contato')}}"                               >Contato</a></li>
+              </ul>
+              <ul class="d-flex navbar-nav">
+                  {% if current_user.is_authenticated %}
+                        <a class="navbar-brand" href="{{ url_for('perfil')}}">
+                            <span class="me-auto"><img src = "{{ url_for('static', filename='fotos_perfil/{}'.format(current_user.foto_perfil)) }}" class="rounded" width="30"></span>
+                        </a>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ url_for('perfil')}}"      >Meu Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ url_for('criar_post')}}"  >Criar Post</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ url_for('sair')}}"        >Sair</a></li>
+                  {% else %}
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{{ url_for('login')}}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login')}}">Criar Conta</a></li>
+                  {% endif %}
+              </ul>
+    </div>
+  </div>
+</nav>
